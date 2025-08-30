@@ -12,7 +12,7 @@
 - Dalí Alfredo Zahir Paredes Salazar (U202213089)  
 - Eder Jair Mauricio Cornejo (U202212471)
 - Sebastian Enrique Ramirez Segura (U202214583)
--
+- Piero Jhoynner Muñoz Salcedo (U202224446)
 
 # Problemática abordada
 El proyecto surge como respuesta a la falta de conocimiento práctico entre los jóvenes peruanos sobre cómo interactuar con el Estado. Esta desinformación contribuye directamente a la alta tasa de informalidad laboral, tributaria y ciudadana, especialmente en jóvenes que acaban de terminar la secundaria o inician estudios superiores.
