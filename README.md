@@ -8,10 +8,10 @@
 - Entre otros trámites relevantes para su ingreso a la vida formal.
 
 # Autores
-- Franco Ernesto De La Cruz Delegado (u202010526)
+- Franco Ernesto De La Cruz Delegado (U202010526)
 - Dalí Alfredo Zahir Paredes Salazar (U202213089)  
 - Eder Jair Mauricio Cornejo (U202212471)
--
+- Sebastian Enrique Ramirez Segura (U202214583)
 -
 
 # Problemática abordada
