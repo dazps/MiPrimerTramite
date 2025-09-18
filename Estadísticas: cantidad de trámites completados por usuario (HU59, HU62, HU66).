@@ -1,0 +1,6 @@
+SELECT u.nombrecomple, COUNT(DISTINCT utp.id_tramite) AS tramites_completados
+FROM usuarios u
+JOIN usuario_tramite_progreso utp ON u.id_usuario = utp.id_usuario
+WHERE utp.completado = true
+GROUP BY u.nombrecomple
+ORDER BY tramites_completados DESC;
