@@ -1,0 +1,38 @@
+package com.example.miprimertramitegithub2025;
+
+import java.time.LocalDateTime;
+
+public class Tramite {
+    private long idTramite;
+    private String titulo;
+    private String descripcion;
+    private int popularidad;
+    private LocalDateTime actualizadoEn;
+
+    // Constructor vacío
+    public Tramite() {}
+
+    // Constructor
+    public Tramite(String titulo, String descripcion, int popularidad, LocalDateTime actualizadoEn) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.popularidad = popularidad;
+        this.actualizadoEn = actualizadoEn;
+    }
+
+    // Getters y Setters
+    public long getIdTramite() { return idTramite; }
+    public void setIdTramite(long idTramite) { this.idTramite = idTramite; }
+
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+
+    public int getPopularidad() { return popularidad; }
+    public void setPopularidad(int popularidad) { this.popularidad = popularidad; }
+
+    public LocalDateTime getActualizadoEn() { return actualizadoEn; }
+    public void setActualizadoEn(LocalDateTime actualizadoEn) { this.actualizadoEn = actualizadoEn; }
+}
