@@ -19,7 +19,7 @@ public class UsuarioDAO {
             stmt.setString(4, usuario.getTelefono());
             stmt.executeUpdate();
 
-            System.out.println("✅ Usuario insertado correctamente.");
+            System.out.println(" Usuario insertado correctamente.");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class UsuarioDAO {
             stmt.setLong(5, usuario.getIdUsuario());
             stmt.executeUpdate();
 
-            System.out.println("✅ Usuario actualizado correctamente.");
+            System.out.println(" Usuario actualizado correctamente.");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class UsuarioDAO {
             stmt.setLong(1, idUsuario);
             stmt.executeUpdate();
 
-            System.out.println("✅ Usuario eliminado correctamente.");
+            System.out.println(" Usuario eliminado correctamente.");
 
         } catch (Exception e) {
             e.printStackTrace();

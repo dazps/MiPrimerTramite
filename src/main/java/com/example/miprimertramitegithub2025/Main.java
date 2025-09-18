@@ -9,14 +9,14 @@ public class Main {
         dao.insertarUsuario(nuevo);
 
         // LISTAR
-        System.out.println("📋 Lista de usuarios:");
+        System.out.println("Lista de usuarios:");
         for (Usuario u : dao.listarUsuarios()) {
             System.out.println(u.getIdUsuario() + " - " + u.getNombreCompleto());
         }
 
         // ACTUALIZAR
         Usuario editar = new Usuario("Eder M. Editado", "nuevo@mail.com", "abc123", "999999999");
-        editar.setIdUsuario(1); // 👈 ID existente en la BD
+        editar.setIdUsuario(1); // ID existente en la BD
         dao.actualizarUsuario(editar);
 
         // ELIMINAR
