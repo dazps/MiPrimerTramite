@@ -1,0 +1,97 @@
+package com.example.miprimertramitegithub2025;
+
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TramiteDAO {
+
+    // CREATE
+    public void insertarTramite(Tramite tramite) {
+        String sql = "INSERT INTO tramites (titulo, descripcion, popularidad, actualizadoen) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, tramite.getTitulo());
+            stmt.setString(2, tramite.getDescripcion());
+            stmt.setInt(3, tramite.getPopularidad());
+            stmt.setTimestamp(4, Timestamp.valueOf(tramite.getActualizadoEn()));
+            stmt.executeUpdate();
+
+            System.out.println(" Tramite insertado correctamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // READ
+    public List<Tramite> listarTramites() {
+        List<Tramite> lista = new ArrayList<>();
+        String sql = "SELECT * FROM tramites";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Tramite t = new Tramite();
+                t.setIdTramite(rs.getLong("id_tramite"));
+                t.setTitulo(rs.getString("titulo"));
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setPopularidad(rs.getInt("popularidad"));
+
+                Timestamp ts = rs.getTimestamp("actualizadoen");
+                if (ts != null) {
+                    t.setActualizadoEn(ts.toLocalDateTime());
+                }
+
+                lista.add(t);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    // UPDATE
+    public void actualizarTramite(Tramite tramite) {
+        String sql = "UPDATE tramites SET titulo=?, descripcion=?, popularidad=?, actualizadoen=? WHERE id_tramite=?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, tramite.getTitulo());
+            stmt.setString(2, tramite.getDescripcion());
+            stmt.setInt(3, tramite.getPopularidad());
+            stmt.setTimestamp(4, Timestamp.valueOf(tramite.getActualizadoEn()));
+            stmt.setLong(5, tramite.getIdTramite());
+            stmt.executeUpdate();
+
+            System.out.println(" Tramite actualizado correctamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // DELETE
+    public void eliminarTramite(long idTramite) {
+        String sql = "DELETE FROM tramites WHERE id_tramite=?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, idTramite);
+            stmt.executeUpdate();
+
+            System.out.println(" Tramite eliminado correctamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
