@@ -1,0 +1,5 @@
+SELECT p.titulo, p.contenido AS pregunta, r.contenido AS respuesta, r.fechacreaci
+FROM comunidad_preguntas p
+LEFT JOIN comunidad_respuestas r ON p.id_pregunta = r.id_pregunta
+WHERE p.id_usuario = 5
+ORDER BY p.fechacreaci DESC;
