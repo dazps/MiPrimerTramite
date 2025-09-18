@@ -1,0 +1,3 @@
+SELECT id_tramite, titulo, descripcion 
+FROM tramites 
+WHERE titulo ILIKE '%dni%';
