@@ -1,0 +1,4 @@
+SELECT titulo, descripcion, popularidad 
+FROM tramites 
+ORDER BY popularidad DESC 
+LIMIT 10;
