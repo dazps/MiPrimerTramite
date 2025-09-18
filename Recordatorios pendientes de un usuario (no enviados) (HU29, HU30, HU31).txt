@@ -1,0 +1,3 @@
+SELECT titulo, mensaje, fechaprogramada
+FROM recordatorios
+WHERE id_usuario = 5 AND enviado = false;

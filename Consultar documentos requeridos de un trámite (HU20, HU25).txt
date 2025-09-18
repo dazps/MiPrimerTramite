@@ -1,0 +1,3 @@
+SELECT nombre, esopcional
+FROM tramite_documentos
+WHERE id_tramite = 2;
