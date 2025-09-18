@@ -1,0 +1,85 @@
+package com.example.miprimertramitegithub2025;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TipoUsuarioDAO {
+
+    // CREATE
+    public void insertarTipoUsuario(TipoUsuario tipoUsuario) {
+        String sql = "INSERT INTO tipo_usuarios (nombre, descripcion) VALUES (?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, tipoUsuario.getNombre());
+            stmt.setString(2, tipoUsuario.getDescripcion());
+            stmt.executeUpdate();
+
+            System.out.println(" TipoUsuario insertado correctamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // READ
+    public List<TipoUsuario> listarTipoUsuarios() {
+        List<TipoUsuario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM tipo_usuarios";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                TipoUsuario t = new TipoUsuario();
+                t.setIdTipoUsuario(rs.getInt("id_tipousuario"));
+                t.setNombre(rs.getString("nombre"));
+                t.setDescripcion(rs.getString("descripcion"));
+                lista.add(t);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    // UPDATE
+    public void actualizarTipoUsuario(TipoUsuario tipoUsuario) {
+        String sql = "UPDATE tipo_usuarios SET nombre=?, descripcion=? WHERE id_tipousuario=?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, tipoUsuario.getNombre());
+            stmt.setString(2, tipoUsuario.getDescripcion());
+            stmt.setInt(3, tipoUsuario.getIdTipoUsuario());
+            stmt.executeUpdate();
+
+            System.out.println(" TipoUsuario actualizado correctamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // DELETE
+    public void eliminarTipoUsuario(int idTipoUsuario) {
+        String sql = "DELETE FROM tipo_usuarios WHERE id_tipousuario=?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idTipoUsuario);
+            stmt.executeUpdate();
+
+            System.out.println(" TipoUsuario eliminado correctamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
