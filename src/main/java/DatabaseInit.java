@@ -13,6 +13,7 @@ public class DatabaseInit {
 
             String sql = """
             
+            
             CREATE TABLE Tipo_Usuarios (
                 ID_TipoUsuario SERIAL PRIMARY KEY,
                 Nombre VARCHAR(50),
