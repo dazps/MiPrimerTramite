@@ -1,4 +1,4 @@
-package pe.edu.upc.miprimertramite.serviciesimplements;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 public class UsuarioTramiteProgresoServiceImplement {
 }
