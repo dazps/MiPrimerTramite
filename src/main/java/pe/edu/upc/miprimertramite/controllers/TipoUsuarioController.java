@@ -2,6 +2,7 @@ package pe.edu.upc.miprimertramite.controllers;
 
 import pe.edu.upc.miprimertramite.dtos.TipoUsuarioDTO;
 import pe.edu.upc.miprimertramite.entities.TipoUsuario;
+import pe.edu.upc.miprimertramite.entities.Usuario;
 import pe.edu.upc.miprimertramite.servicesinterfaces.ITipoUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

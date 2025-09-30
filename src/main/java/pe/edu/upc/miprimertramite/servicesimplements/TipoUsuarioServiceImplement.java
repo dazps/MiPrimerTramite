@@ -1,6 +1,7 @@
 package pe.edu.upc.miprimertramite.servicesimplementations;
 
 import pe.edu.upc.miprimertramite.entities.TipoUsuario;
+import pe.edu.upc.miprimertramite.entities.Usuario;
 import pe.edu.upc.miprimertramite.repositories.ITipoUsuarioRepository;
 import pe.edu.upc.miprimertramite.servicesinterfaces.ITipoUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TipoUsuarioServiceImpl implements ITipoUsuarioService {
+public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 
     @Autowired
     private ITipoUsuarioRepository tipoUsuarioRepository;

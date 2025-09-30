@@ -1,4 +1,4 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.ValoracionTramite;
 import pe.edu.upc.miprimertramite.repositories.IValoracionTramiteRepository;

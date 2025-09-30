@@ -39,4 +39,8 @@ public class UsuarioDTO {
 
     public LocalDateTime getUltimoLogin() { return ultimoLogin; }
     public void setUltimoLogin(LocalDateTime ultimoLogin) { this.ultimoLogin = ultimoLogin; }
+
+    public String getPassword() {
+        return "";
+    }
 }

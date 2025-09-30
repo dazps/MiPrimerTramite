@@ -1,6 +1,8 @@
 package pe.edu.upc.miprimertramite.servicesinterfaces;
 
 import pe.edu.upc.miprimertramite.entities.TipoUsuario;
+import pe.edu.upc.miprimertramite.entities.Usuario;
+
 import java.util.List;
 
 public interface ITipoUsuarioService {
