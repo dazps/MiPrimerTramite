@@ -1,51 +1,55 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
-import pe.edu.upc.miprimertramite.entities.ValoracionTramite;
-import pe.edu.upc.miprimertramite.repositories.IValoracionTramiteRepository;
-import pe.edu.upc.miprimertramite.servicesinterfaces.IValoracionTramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.miprimertramite.entities.ValoracionTramite;
+import pe.edu.upc.miprimertramite.repositories.IValoracionTramiteRepositories;
+import pe.edu.upc.miprimertramite.servicesinterfaces.IValoracionTramiteService;
 
 import java.util.List;
 
 @Service
-public class ValoracionTramiteServiceImpl implements IValoracionTramiteService {
+public class ValoracionTramiteServiceImplement implements IValoracionTramiteService {
 
     @Autowired
-    private IValoracionTramiteRepository valoracionTramiteRepository;
-
-    @Override
-    public ValoracionTramite save(ValoracionTramite valoracion) {
-        return valoracionTramiteRepository.save(valoracion);
-    }
+    private IValoracionTramiteRepositories repository;
 
     @Override
     public List<ValoracionTramite> list() {
-        return valoracionTramiteRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public ValoracionTramite findById(int id) {
-        return valoracionTramiteRepository.findById(id).orElse(null);
+    public void insert(ValoracionTramite valoracion) {
+        repository.save(valoracion);
+    }
+
+    @Override
+    public ValoracionTramite listId(int id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void update(ValoracionTramite valoracion) {
+        repository.save(valoracion);
     }
 
     @Override
     public void delete(int id) {
-        valoracionTramiteRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
-    public List<ValoracionTramite> findByTramiteId(int idTramite) {
-        return valoracionTramiteRepository.findByTramiteId(idTramite);
+    public List<ValoracionTramite> searchByComment(String comentario) {
+        // Delega la búsqueda de comentario al repositorio
+        return repository.buscarPorComentario(comentario);
     }
 
     @Override
-    public Double findAveragePuntuacionByTramiteId(int idTramite) {
-        return valoracionTramiteRepository.findAveragePuntuacionByTramiteId(idTramite);
+    public List<ValoracionTramite> searchByRatingRange(int min, int max) {
+        return repository.buscarPorRangoCalificacion(min, max);
     }
 
-    @Override
-    public Long countByTramiteId(int idTramite) {
-        return valoracionTramiteRepository.countByTramiteId(idTramite);
-    }
 }
+
+

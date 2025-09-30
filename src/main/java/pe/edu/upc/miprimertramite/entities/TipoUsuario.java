@@ -1,42 +1,53 @@
 package pe.edu.upc.miprimertramite.entities;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "Tipo_Usuarios")
+@Table(name = "TipoUsuario")
+
 public class TipoUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_TipoUsuario")
-    private int idTipoUsuario;
+    private int idTipo;
 
-    @Column(name = "Nombre", nullable = false, length = 50)
-    private String nombre;
+    @Column(name = "nombreTipo", nullable = false, length = 100)
+    private String nombreTipo;
 
-    @Column(name = "Descripcion", length = 150)
-    private String descripcion;
+    @Column(name = "descripcionTipo", nullable = false, length = 200)
+    private String descripcionTipo;
 
-    @OneToMany(mappedBy = "tipoUsuario", fetch = FetchType.LAZY)
-    private List<Usuario> usuarios;
-
-    public TipoUsuario() {}
-
-    public TipoUsuario(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+    public TipoUsuario() {
     }
 
-    public int getIdTipoUsuario() { return idTipoUsuario; }
-    public void setIdTipoUsuario(int idTipoUsuario) { this.idTipoUsuario = idTipoUsuario; }
+    public TipoUsuario(int idTipo, String nombreTipo, String descripcionTipo) {
+        this.idTipo = idTipo;
+        this.nombreTipo = nombreTipo;
+        this.descripcionTipo = descripcionTipo;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public int getIdTipo() {
+        return idTipo;
+    }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
 
-    public List<Usuario> getUsuarios() { return usuarios; }
-    public void setUsuarios(List<Usuario> usuarios) { this.usuarios = usuarios; }
+    public String getNombreTipo() {
+        return nombreTipo;
+    }
+
+    public void setNombreTipo(String nombreTipo) {
+        this.nombreTipo = nombreTipo;
+    }
+
+    public String getDescripcionTipo() {
+        return descripcionTipo;
+    }
+
+    public void setDescripcionTipo(String descripcionTipo) {
+        this.descripcionTipo = descripcionTipo;
+    }
+
 }

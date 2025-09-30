@@ -1,21 +1,20 @@
 package pe.edu.upc.miprimertramite.repositories;
 
-import pe.edu.upc.miprimertramite.entities.ValoracionTramite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pe.edu.upc.miprimertramite.entities.ValoracionTramite;
 
 import java.util.List;
 
 @Repository
-public interface IValoracionTramiteRepository extends JpaRepository<ValoracionTramite, Integer> {
+public interface IValoracionTramiteRepositories extends JpaRepository<ValoracionTramite, Integer> {
 
-    @Query(value = "SELECT * FROM Valoraciones_Tramites WHERE ID_Tramite = ?1", nativeQuery = true)
-    List<ValoracionTramite> findByTramiteId(int idTramite);
+    @Query("SELECT v FROM ValoracionTramite v WHERE v.comentario LIKE %:comentario%")
+    public List<ValoracionTramite> buscarPorComentario(@Param("comentario") String comentario);
 
-    @Query(value = "SELECT AVG(Puntuacion) FROM Valoraciones_Tramites WHERE ID_Tramite = ?1", nativeQuery = true)
-    Double findAveragePuntuacionByTramiteId(int idTramite);
-
-    @Query(value = "SELECT COUNT(*) FROM Valoraciones_Tramites WHERE ID_Tramite = ?1", nativeQuery = true)
-    Long countByTramiteId(int idTramite);
+    @Query("SELECT v FROM ValoracionTramite v WHERE v.puntuacion >= :min AND v.puntuacion <= :max")
+    public List<ValoracionTramite> buscarPorRangoCalificacion(@Param("min") int min, @Param("max") int max);
 }
+

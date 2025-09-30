@@ -1,63 +1,66 @@
 package pe.edu.upc.miprimertramite.entities;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "Tramite_Pasos")
+@Table(name = "TramitePaso")
 public class TramitePaso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Paso")
     private int idPaso;
 
-    @Column(name = "ID_Tram", nullable = false)
-    private int idTram;
-
-    @Column(name = "Orden", nullable = false)
-    private int orden;
-
-    @Column(name = "Titulo", nullable = false, length = 150)
-    private String titulo;
-
-    @Column(name = "Descripc", columnDefinition = "text")
-    private String descripc;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_Tram", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "idTramite", nullable = false)
     private Tramite tramite;
 
-    @OneToMany(mappedBy = "paso", fetch = FetchType.LAZY)
-    private List<UsuarioTramiteProgreso> progresos;
+    @Column(name = "descripcionPaso", nullable = false, length = 500)
+    private String descripcionPaso;
 
+    @Column(name = "orden", nullable = false)
+    private int ordenPaso;
+
+    // Constructor vacío
     public TramitePaso() {}
 
-    public TramitePaso(int idTram, int orden, String titulo, String descripc) {
-        this.idTram = idTram;
-        this.orden = orden;
-        this.titulo = titulo;
-        this.descripc = descripc;
+    // Constructor con parámetros
+    public TramitePaso(Tramite tramite, String descripcionPaso, int ordenPaso) {
+        this.tramite = tramite;
+        this.descripcionPaso = descripcionPaso;
+        this.ordenPaso = ordenPaso;
     }
 
-    public int getIdPaso() { return idPaso; }
-    public void setIdPaso(int idPaso) { this.idPaso = idPaso; }
+    // Getters y Setters
+    public int getIdPaso() {
+        return idPaso;
+    }
 
-    public int getIdTram() { return idTram; }
-    public void setIdTram(int idTram) { this.idTram = idTram; }
+    public void setIdPaso(int idPaso) {
+        this.idPaso = idPaso;
+    }
 
-    public int getOrden() { return orden; }
-    public void setOrden(int orden) { this.orden = orden; }
+    public Tramite getTramite() {
+        return tramite;
+    }
 
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public void setTramite(Tramite tramite) {
+        this.tramite = tramite;
+    }
 
-    public String getDescripc() { return descripc; }
-    public void setDescripc(String descripc) { this.descripc = descripc; }
+    public String getDescripcionPaso() {
+        return descripcionPaso;
+    }
 
-    public Tramite getTramite() { return tramite; }
-    public void setTramite(Tramite tramite) { this.tramite = tramite; }
+    public void setDescripcionPaso(String descripcionPaso) {
+        this.descripcionPaso = descripcionPaso;
+    }
 
-    public List<UsuarioTramiteProgreso> getProgresos() { return progresos; }
-    public void setProgresos(List<UsuarioTramiteProgreso> progresos) { this.progresos = progresos; }
+    public int getOrdenPaso() {
+        return ordenPaso;
+    }
+
+    public void setOrdenPaso(int ordenPaso) {
+        this.ordenPaso = ordenPaso;
+    }
 }
+

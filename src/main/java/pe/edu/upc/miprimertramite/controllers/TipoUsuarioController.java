@@ -1,79 +1,93 @@
 package pe.edu.upc.miprimertramite.controllers;
 
-import pe.edu.upc.miprimertramite.dtos.TipoUsuarioDTO;
-import pe.edu.upc.miprimertramite.entities.TipoUsuario;
-import pe.edu.upc.miprimertramite.servicesinterfaces.ITipoUsuarioService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.miprimertramite.dtos.TipoUsuarioDTO;
+import pe.edu.upc.miprimertramite.entities.TipoUsuario;
+import pe.edu.upc.miprimertramite.servicesinterfaces.ITipoUsuarioService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/tipos-usuario")
+@RequestMapping("/tipousuario")
 public class TipoUsuarioController {
 
     @Autowired
-    private ITipoUsuarioService tipoUsuarioService;
-
-    @PostMapping
-    public ResponseEntity<TipoUsuarioDTO> create(@RequestBody TipoUsuarioDTO dto) {
-        TipoUsuario tipo = new TipoUsuario();
-        tipo.setNombre(dto.getNombre());
-        tipo.setDescripcion(dto.getDescripcion());
-
-        TipoUsuario saved = tipoUsuarioService.save(tipo);
-        return new ResponseEntity<>(toDTO(saved), HttpStatus.CREATED);
-    }
+    private ITipoUsuarioService service;
 
     @GetMapping
-    public ResponseEntity<List<TipoUsuarioDTO>> getAll() {
-        List<TipoUsuario> tipos = tipoUsuarioService.list();
-        List<TipoUsuarioDTO> dtos = tipos.stream().map(this::toDTO).collect(Collectors.toList());
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    public List<TipoUsuarioDTO> listar() {
+        return service.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, TipoUsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public void registrar(@RequestBody TipoUsuarioDTO dto) {
+        ModelMapper m = new ModelMapper();
+        TipoUsuario tu = m.map(dto, TipoUsuario.class);
+        service.insert(tu);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TipoUsuarioDTO> getById(@PathVariable int id) {
-        TipoUsuario tipo = tipoUsuarioService.findById(id);
-        if (tipo != null) {
-            return new ResponseEntity<>(toDTO(tipo), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
+        TipoUsuario tu = service.listId(id);
+        if (tu == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
         }
+        ModelMapper m = new ModelMapper();
+        TipoUsuarioDTO dto = m.map(tu, TipoUsuarioDTO.class);
+        return ResponseEntity.ok(dto);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> modificar(@RequestBody TipoUsuarioDTO dto) {
+        ModelMapper m = new ModelMapper();
+        TipoUsuario tu = m.map(dto, TipoUsuario.class);
+
+        TipoUsuario existente = service.listId(dto.getIdTipo());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un registro con el ID: " + tu.getIdTipo());
+        }
+
+        service.update(tu);
+        return ResponseEntity.ok("Registro con ID " + tu.getIdTipo() + " modificado correctamente.");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id) {
-        tipoUsuarioService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<TipoUsuarioDTO> getByNombre(@PathVariable String nombre) {
-        TipoUsuario tipo = tipoUsuarioService.findByNombre(nombre);
-        if (tipo != null) {
-            return new ResponseEntity<>(toDTO(tipo), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
+        TipoUsuario tu = service.listId(id);
+        if (tu == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
         }
+        service.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    @GetMapping("/usuarios/{nombreTipo}")
-    public ResponseEntity<List<TipoUsuarioDTO>> getUsuariosByTipoNombre(@PathVariable String nombreTipo) {
-        List<Usuario> usuarios = tipoUsuarioService.findUsuariosByTipoNombre(nombreTipo);
-        // Aquí podrías devolver una lista de UsuarioDTO si lo necesitas, pero por ahora solo mostramos el tipo.
-        // Si quieres listar usuarios, crea un endpoint en UsuarioController.
-        return new ResponseEntity<>(HttpStatus.OK); // Placeholder - ajusta según necesidad
+    // Nuevo metodo para búsqueda por nombre
+    @GetMapping("/buscar")
+    public List<TipoUsuarioDTO> buscarPorNombre(@RequestParam String name) {
+        return service.searchName(name).stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, TipoUsuarioDTO.class);
+        }).collect(Collectors.toList());
     }
+    // URL de uso: GET /tipousuario/buscar?name=Cliente
 
-    private TipoUsuarioDTO toDTO(TipoUsuario entidad) {
-        return new TipoUsuarioDTO(
-                entidad.getIdTipoUsuario(),
-                entidad.getNombre(),
-                entidad.getDescripcion()
-        );
+    // Nuevo metodo para el conteo analítico
+    @GetMapping("/conteo")
+    public List<String[]> contarUsuariosPorTipo() {
+        return service.countUsersByTipo();
     }
+    // URL de uso: GET /tipousuario/conteo
+    // Devuelve una lista de arrays [nombreTipo, cantidad]
 }
+

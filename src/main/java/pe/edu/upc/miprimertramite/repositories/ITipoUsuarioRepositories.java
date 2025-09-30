@@ -1,18 +1,20 @@
 package pe.edu.upc.miprimertramite.repositories;
 
-import pe.edu.upc.miprimertramite.entities.TipoUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pe.edu.upc.miprimertramite.entities.TipoUsuario;
 
 import java.util.List;
 
 @Repository
-public interface ITipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer> {
+public interface ITipoUsuarioRepositories extends JpaRepository<TipoUsuario, Integer> {
 
-    @Query(value = "SELECT * FROM Tipo_Usuarios WHERE Nombre = ?1", nativeQuery = true)
-    TipoUsuario findByNombre(String nombre);
+    @Query("SELECT t FROM TipoUsuario t WHERE t.nombreTipo LIKE %:nombre%")
+    public List<TipoUsuario> buscarPorNombre(@Param("nombre") String nombre);
 
-    @Query(value = "SELECT u.* FROM Usuarios u JOIN Tipo_Usuarios t ON u.ID_TipoUsuario = t.ID_TipoUsuario WHERE t.Nombre = ?1", nativeQuery = true)
-    List<Usuario> findUsuariosByTipoNombre(String nombreTipo);
+    @Query("SELECT t.nombreTipo, COUNT(u.id) FROM TipoUsuario t JOIN Usuario u ON t.idTipo = u.idTipoUsuario.idTipo GROUP BY t.nombreTipo")
+    public List<Object[]> countUsersByTipo();
+
 }

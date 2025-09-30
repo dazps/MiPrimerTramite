@@ -1,46 +1,61 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
-import pe.edu.upc.miprimertramite.entities.TramitePaso;
-import pe.edu.upc.miprimertramite.repositories.ITramitePasoRepository;
-import pe.edu.upc.miprimertramite.servicesinterfaces.ITramitePasoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.miprimertramite.entities.TramitePaso;
+import pe.edu.upc.miprimertramite.repositories.ITramitePasoRepositories;
+import pe.edu.upc.miprimertramite.servicesinterfaces.ITramitePasoService;
 
 import java.util.List;
 
 @Service
-public class TramitePasoServiceImpl implements ITramitePasoService {
+public class TramitePasoServiceImplement implements ITramitePasoService {
 
     @Autowired
-    private ITramitePasoRepository tramitePasoRepository;
-
-    @Override
-    public TramitePaso save(TramitePaso paso) {
-        return tramitePasoRepository.save(paso);
-    }
+    private ITramitePasoRepositories repository;
 
     @Override
     public List<TramitePaso> list() {
-        return tramitePasoRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public TramitePaso findById(int id) {
-        return tramitePasoRepository.findById(id).orElse(null);
+    public void insert(TramitePaso paso) {
+        repository.save(paso);
+    }
+
+    @Override
+    public TramitePaso listId(int id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void update(TramitePaso paso) {
+        repository.save(paso);
     }
 
     @Override
     public void delete(int id) {
-        tramitePasoRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
+    // Metodo para buscar pasos por descripción, usando el query personalizado
     @Override
-    public List<TramitePaso> findByTramiteId(int idTramite) {
-        return tramitePasoRepository.findByTramiteId(idTramite);
+    public List<TramitePaso> searchDescription(String descriptionPaso) {
+        return repository.buscarPorDescripcion(descriptionPaso);
     }
 
+    // Metodo para listar pasos de un trámite por ID, ordenados
     @Override
-    public List<TramitePaso> findByTramiteIdOrdered(int idTramite) {
-        return tramitePasoRepository.findByTramiteIdOrdered(idTramite);
+    public List<TramitePaso> listByTramiteId(int idTramite) {
+        return repository.findByTramiteIdTramiteOrderByOrdenPasoAsc(idTramite);
+    }
+
+    // Metodo para contar pasos por trámite por ID
+    @Override
+    public int countStepsByTramiteId(int idTramite) {
+        // Se convierte de Long (repositorio) a int (interfaz de servicio)
+        Long count = repository.contarPasosPorTramite(idTramite);
+        return count != null ? count.intValue() : 0;
     }
 }
