@@ -14,7 +14,7 @@ public interface ITipoUsuarioRepositories extends JpaRepository<TipoUsuario, Int
     @Query("SELECT t FROM TipoUsuario t WHERE t.nombreTipo LIKE %:nombre%")
     public List<TipoUsuario> buscarPorNombre(@Param("nombre") String nombre);
 
-    @Query("SELECT t.nombreTipo, COUNT(u.id) FROM TipoUsuario t JOIN Usuario u ON t.idTipo = u.tipoUsuario.idTipo GROUP BY t.nombreTipo")
+    @Query("SELECT t.nombreTipo, COUNT(u.id) FROM TipoUsuario t JOIN Usuario u ON t.idTipo = u.idTipoUsuario.idTipo GROUP BY t.nombreTipo")
     public List<Object[]> countUsersByTipo();
 
 }
