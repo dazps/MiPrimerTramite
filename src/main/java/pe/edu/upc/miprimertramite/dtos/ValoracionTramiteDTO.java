@@ -1,13 +1,22 @@
 package pe.edu.upc.miprimertramite.dtos;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ValoracionTramiteDTO {
+    private int idValoracion;
     private int idusuario;
     private int idtramite;
     private int puntuacion;
     private String comentario;
-    private LocalDate fechaValoracion;
+    private LocalDateTime fechaValoracion;
+
+    public int getIdValoracion() {
+        return idValoracion;
+    }
+
+    public void setIdValoracion(int idValoracion) {
+        this.idValoracion = idValoracion;
+    }
 
     public int getIdusuario() {
         return idusuario;
@@ -41,11 +50,11 @@ public class ValoracionTramiteDTO {
         this.comentario = comentario;
     }
 
-    public LocalDate getFechaValoracion() {
+    public LocalDateTime getFechaValoracion() {
         return fechaValoracion;
     }
 
-    public void setFechaValoracion(LocalDate fechaValoracion) {
+    public void setFechaValoracion(LocalDateTime fechaValoracion) {
         this.fechaValoracion = fechaValoracion;
     }
 }
