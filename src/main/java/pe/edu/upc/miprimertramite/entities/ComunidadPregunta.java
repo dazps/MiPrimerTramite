@@ -2,6 +2,7 @@ package pe.edu.upc.miprimertramite.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Comunidad_Preguntas")
@@ -10,34 +11,41 @@ public class ComunidadPregunta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Pregunta")
-    private Int idPregunta;
+    private int idPregunta;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_Usuario", nullable = false)
-    private Usuario usuario;
+    @Column(name = "ID_Usuario", nullable = false)
+    private int idUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_Tramite", nullable = false)
-    private Tramite tramite;
-
-    @Column(name = "Titulo", length = 200, nullable = false)
+    @Column(name = "Titulo", nullable = false, length = 200)
     private String titulo;
 
-    @Column(name = "Contenido", nullable = false)
+    @Column(name = "Contenido", columnDefinition = "text")
     private String contenido;
 
-    @Column(name = "FechaCreacion", nullable = false)
+    @Column(name = "FechaCreacion")
     private LocalDateTime fechaCreacion;
 
-    // Getters y Setters
-    public Int getIdPregunta() { return idPregunta; }
-    public void setIdPregunta(Int idPregunta) { this.idPregunta = idPregunta; }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_Usuario", insertable = false, updatable = false)
+    private Usuario usuario;
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    @OneToMany(mappedBy = "pregunta", fetch = FetchType.LAZY)
+    private List<ComunidadRespuesta> respuestas;
 
-    public Tramite getTramite() { return tramite; }
-    public void setTramite(Tramite tramite) { this.tramite = tramite; }
+    public ComunidadPregunta() {}
+
+    public ComunidadPregunta(int idUsuario, String titulo, String contenido) {
+        this.idUsuario = idUsuario;
+        this.titulo = titulo;
+        this.contenido = contenido;
+        this.fechaCreacion = LocalDateTime.now();
+    }
+
+    public int getIdPregunta() { return idPregunta; }
+    public void setIdPregunta(int idPregunta) { this.idPregunta = idPregunta; }
+
+    public int getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
 
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }
@@ -47,4 +55,10 @@ public class ComunidadPregunta {
 
     public LocalDateTime getFechaCreacion() { return fechaCreacion; }
     public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
+
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+
+    public List<ComunidadRespuesta> getRespuestas() { return respuestas; }
+    public void setRespuestas(List<ComunidadRespuesta> respuestas) { this.respuestas = respuestas; }
 }
