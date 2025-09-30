@@ -17,7 +17,7 @@ public class TramitePaso {
     @Column(name = "descripcionPaso", nullable = false, length = 500)
     private String descripcionPaso;
 
-    @Column(name = "ordenPaso", nullable = false)
+    @Column(name = "orden", nullable = false)
     private int ordenPaso;
 
     // Constructor vacío

@@ -3,7 +3,7 @@ package pe.edu.upc.miprimertramite.dtos;
 public class TramitePasoDTO {
     private int idPaso;
     private int idTramite;
-    private String descripcion;
+    private String descripcionPaso;
     private int ordenPaso;
 
     public int getIdPaso() {
@@ -22,12 +22,12 @@ public class TramitePasoDTO {
         this.idTramite = idTramite;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionPaso() {
+        return descripcionPaso;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionPaso(String descripcionPaso) {
+        this.descripcionPaso = descripcionPaso;
     }
 
     public int getOrdenPaso() {
