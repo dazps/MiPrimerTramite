@@ -1,4 +1,18 @@
 package pe.edu.upc.miprimertramite.repositories;
 
-public interface IComunidadPreguntaRepositories {
+import pe.edu.upc.miprimertramite.entities.ComunidadPregunta;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface IComunidadPreguntaRepository extends JpaRepository<ComunidadPregunta, Integer> {
+
+    @Query(value = "SELECT * FROM Comunidad_Preguntas WHERE ID_Usuario = ?1", nativeQuery = true)
+    List<ComunidadPregunta> findByUsuarioId(int idUsuario);
+
+    @Query(value = "SELECT * FROM Comunidad_Preguntas ORDER BY FechaCreacion DESC LIMIT 5", nativeQuery = true)
+    List<ComunidadPregunta> findLatest5();
 }
