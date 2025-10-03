@@ -1,6 +1,7 @@
 package pe.edu.upc.miprimertramite.servicesinterfaces;
 
 import pe.edu.upc.miprimertramite.entities.TipoNotificacion;
+import java.util.List;
 
 public interface ITipoNotificacionService {
     TipoNotificacion save(TipoNotificacion tipo);

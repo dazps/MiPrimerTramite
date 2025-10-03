@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.Usuario;
-import pe.edu.upc.miprimertramite.repositories.IUsuarioRepository;
+import pe.edu.upc.miprimertramite.repositories.IUsuarioRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsuarioServiceImpl implements IUsuarioService {
+public class UsuarioServiceImplement implements IUsuarioService {
 
     @Autowired
-    private IUsuarioRepository usuarioRepository;
+    private IUsuarioRepositories usuarioRepository;
 
     @Override
     public Usuario save(Usuario usuario) {

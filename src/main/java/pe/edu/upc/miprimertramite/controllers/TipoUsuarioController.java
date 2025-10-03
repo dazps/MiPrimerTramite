@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 public class TipoUsuarioController {
 
     @Autowired
-    private ITipoUsuarioService service;
+    private ITipoUsuarioService tipoUsuarioService;
 
     @GetMapping
     public List<TipoUsuarioDTO> listar() {
-        return service.list().stream().map(x -> {
+        return tipoUsuarioService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, TipoUsuarioDTO.class);
         }).collect(Collectors.toList());
@@ -31,12 +31,12 @@ public class TipoUsuarioController {
     public void registrar(@RequestBody TipoUsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoUsuario tu = m.map(dto, TipoUsuario.class);
-        service.insert(tu);
+        tipoUsuarioService.insert(tu);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
-        TipoUsuario tu = service.listId(id);
+        TipoUsuario tu = tipoUsuarioService.listId(id);
         if (tu == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
@@ -51,31 +51,31 @@ public class TipoUsuarioController {
         ModelMapper m = new ModelMapper();
         TipoUsuario tu = m.map(dto, TipoUsuario.class);
 
-        TipoUsuario existente = service.listId(dto.getIdTipo());
+        TipoUsuario existente = tipoUsuarioService.listId(dto.getIdTipo());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se puede modificar. No existe un registro con el ID: " + tu.getIdTipo());
         }
 
-        service.update(tu);
+        tipoUsuarioService.update(tu);
         return ResponseEntity.ok("Registro con ID " + tu.getIdTipo() + " modificado correctamente.");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        TipoUsuario tu = service.listId(id);
+        TipoUsuario tu = tipoUsuarioService.listId(id);
         if (tu == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        service.delete(id);
+        tipoUsuarioService.delete(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
     // Nuevo metodo para búsqueda por nombre
     @GetMapping("/buscar")
     public List<TipoUsuarioDTO> buscarPorNombre(@RequestParam String name) {
-        return service.searchName(name).stream().map(x -> {
+        return tipoUsuarioService.searchName(name).stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, TipoUsuarioDTO.class);
         }).collect(Collectors.toList());
@@ -85,7 +85,7 @@ public class TipoUsuarioController {
     // Nuevo metodo para el conteo analítico
     @GetMapping("/conteo")
     public List<String[]> contarUsuariosPorTipo() {
-        return service.countUsersByTipo();
+        return tipoUsuarioService.countUsersByTipo();
     }
     // URL de uso: GET /tipousuario/conteo
     // Devuelve una lista de arrays [nombreTipo, cantidad]

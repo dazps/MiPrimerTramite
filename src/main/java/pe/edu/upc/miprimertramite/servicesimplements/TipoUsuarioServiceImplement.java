@@ -12,43 +12,43 @@ import java.util.List;
 public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 
     @Autowired
-    private ITipoUsuarioRepositories repository;
+    private ITipoUsuarioRepositories tipoUsuarioRepository;
 
     @Override
     public List<TipoUsuario> list() {
-        return repository.findAll();
+        return tipoUsuarioRepository.findAll();
     }
 
     @Override
     public void insert(TipoUsuario tipoUsuario) {
-        repository.save(tipoUsuario);
+        tipoUsuarioRepository.save(tipoUsuario);
     }
 
     @Override
     public TipoUsuario listId(int id) {
         // Usa findById y orElse para manejar el caso de no encontrar el ID
-        return repository.findById(id).orElse(null);
+        return tipoUsuarioRepository.findById(id).orElse(null);
     }
 
     @Override
     public void update(TipoUsuario tipoUsuario) {
-        repository.save(tipoUsuario);
+        tipoUsuarioRepository.save(tipoUsuario);
     }
 
     @Override
     public void delete(int id) {
-        repository.deleteById(id);
+        tipoUsuarioRepository.deleteById(id);
     }
 
     @Override
     public List<TipoUsuario> searchName(String nameTipo) {
         // Conecta el metodo del servicio con el query del repositorio
-        return repository.buscarPorNombre(nameTipo);
+        return tipoUsuarioRepository.buscarPorNombre(nameTipo);
     }
 
     @Override
     public List<String[]> countUsersByTipo() {
-        List<Object[]> results = repository.countUsersByTipo();
+        List<Object[]> results = tipoUsuarioRepository.countUsersByTipo();
         return results.stream()
                 .map(row -> new String[]{
                         (String) row[0],         // nombreTipo (String)

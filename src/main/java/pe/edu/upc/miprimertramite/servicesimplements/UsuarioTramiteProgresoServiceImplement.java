@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.UsuarioTramiteProgreso;
-import pe.edu.upc.miprimertramite.repositories.IUsuarioTramiteProgresoRepository;
+import pe.edu.upc.miprimertramite.repositories.IUsuarioTramiteProgresoRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.IUsuarioTramiteProgresoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsuarioTramiteProgresoServiceImpl implements IUsuarioTramiteProgresoService {
+public class UsuarioTramiteProgresoServiceImplement implements IUsuarioTramiteProgresoService {
 
     @Autowired
-    private IUsuarioTramiteProgresoRepository usuarioTramiteProgresoRepository;
+    private IUsuarioTramiteProgresoRepositories usuarioTramiteProgresoRepository;
 
     @Override
     public UsuarioTramiteProgreso save(UsuarioTramiteProgreso progreso) {

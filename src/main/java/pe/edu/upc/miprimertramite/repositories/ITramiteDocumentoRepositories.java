@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ITramiteDocumentoRepository extends JpaRepository<TramiteDocumento, Integer> {
+public interface ITramiteDocumentoRepositories extends JpaRepository<TramiteDocumento, Integer> {
 
     @Query(value = "SELECT * FROM Tramite_Documentos WHERE ID_Tramite = ?1", nativeQuery = true)
     List<TramiteDocumento> findByTramiteId(int idTramite);

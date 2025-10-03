@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.Tramite;
-import pe.edu.upc.miprimertramite.repositories.ITramiteRepository;
+import pe.edu.upc.miprimertramite.repositories.ITramiteRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.ITramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TramiteServiceImpl implements ITramiteService {
+public class TramiteServiceImplement implements ITramiteService {
 
     @Autowired
-    private ITramiteRepository tramiteRepository;
+    private ITramiteRepositories tramiteRepository;
 
     @Override
     public Tramite save(Tramite tramite) {

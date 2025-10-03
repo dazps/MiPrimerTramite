@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.TramiteDocumento;
-import pe.edu.upc.miprimertramite.repositories.ITramiteDocumentoRepository;
+import pe.edu.upc.miprimertramite.repositories.ITramiteDocumentoRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.ITramiteDocumentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TramiteDocumentoServiceImpl implements ITramiteDocumentoService {
+public class TramiteDocumentoServiceImplement implements ITramiteDocumentoService {
 
     @Autowired
-    private ITramiteDocumentoRepository tramiteDocumentoRepository;
+    private ITramiteDocumentoRepositories tramiteDocumentoRepository;
 
     @Override
     public TramiteDocumento save(TramiteDocumento documento) {

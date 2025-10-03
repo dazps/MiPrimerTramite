@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IUsuarioFavoritoRepository extends JpaRepository<UsuarioFavorito, Integer> {
+public interface IUsuarioFavoritoRepositories extends JpaRepository<UsuarioFavorito, Integer> {
 
     @Query(value = "SELECT * FROM Usuario_Favoritos WHERE ID_Usuario = ?1", nativeQuery = true)
     List<UsuarioFavorito> findByUsuarioId(int idUsuario);
