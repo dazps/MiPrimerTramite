@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.UsuarioFavorito;
-import pe.edu.upc.miprimertramite.repositories.IUsuarioFavoritoRepository;
+import pe.edu.upc.miprimertramite.repositories.IUsuarioFavoritoRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.IUsuarioFavoritoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsuarioFavoritoServiceImpl implements IUsuarioFavoritoService {
+public class UsuarioFavoritoServiceImplement implements IUsuarioFavoritoService {
 
     @Autowired
-    private IUsuarioFavoritoRepository usuarioFavoritoRepository;
+    private IUsuarioFavoritoRepositories usuarioFavoritoRepository;
 
     @Override
     public UsuarioFavorito save(UsuarioFavorito favorito) {

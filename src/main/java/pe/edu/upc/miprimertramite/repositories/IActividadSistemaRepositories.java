@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IActividadSistemaRepository extends JpaRepository<ActividadSistema, Integer> {
+public interface IActividadSistemaRepositories extends JpaRepository<ActividadSistema, Integer> {
 
-    @Query(value = "SELECT * FROM Actividad_Sistema WHERE ID_Usuario = ?1 ORDER BY Fecha DESC LIMIT 10", nativeQuery = true)
+    @Query(value = "SELECT * FROM ActividadSistema WHERE idUsuario = ?1 ORDER BY Fecha DESC LIMIT 10", nativeQuery = true)
     List<ActividadSistema> findLatest10ByUsuarioId(int idUsuario);
 
-    @Query(value = "SELECT COUNT(*) FROM Actividad_Sistema WHERE ID_Usuario = ?1 AND TipoActividad = ?2", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM ActividadSistema WHERE idUsuario = ?1 AND TipoActividad = ?2", nativeQuery = true)
     Long countByUsuarioAndTipo(int idUsuario, String tipoActividad);
 }

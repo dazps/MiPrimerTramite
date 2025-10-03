@@ -1,57 +1,78 @@
 package pe.edu.upc.miprimertramite.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Actividad_Sistema")
+@Table(name = "ActividadSistema")
 public class ActividadSistema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Actividad")
+    @GeneratedValue
     private int idActividad;
 
-    @Column(name = "ID_Usuario", nullable = false)
-    private int idUsuario;
-
-    @Column(name = "TipoActividad", nullable = false, length = 50)
+    @Column(name = "TipoActividad", length = 50, nullable = false)
     private String tipoActividad;
 
-    @Column(name = "Descripcion", columnDefinition = "text")
+    @Column(name = "Descripcion", length = 255, nullable = false)
     private String descripcion;
 
-    @Column(name = "Fecha")
+    @Column(name = "Fecha", nullable = false)
     private LocalDateTime fecha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_Usuario", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    public ActividadSistema() {}
-
-    public ActividadSistema(int idUsuario, String tipoActividad, String descripcion) {
-        this.idUsuario = idUsuario;
-        this.tipoActividad = tipoActividad;
-        this.descripcion = descripcion;
-        this.fecha = LocalDateTime.now();
+    public ActividadSistema(){
     }
 
-    public int getIdActividad() { return idActividad; }
-    public void setIdActividad(int idActividad) { this.idActividad = idActividad; }
+    public ActividadSistema(int idActividad, String tipoActividad, String descripcion, LocalDateTime fecha, Usuario usuario) {
+        this.idActividad = idActividad;
+        this.tipoActividad = tipoActividad;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.usuario = usuario;
+    }
 
-    public int getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
+    public int getIdActividad() {
+        return idActividad;
+    }
 
-    public String getTipoActividad() { return tipoActividad; }
-    public void setTipoActividad(String tipoActividad) { this.tipoActividad = tipoActividad; }
+    public void setIdActividad(int idActividad) {
+        this.idActividad = idActividad;
+    }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public String getTipoActividad() {
+        return tipoActividad;
+    }
 
-    public LocalDateTime getFecha() { return fecha; }
-    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+    public void setTipoActividad(String tipoActividad) {
+        this.tipoActividad = tipoActividad;
+    }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

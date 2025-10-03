@@ -2,12 +2,15 @@ package pe.edu.upc.miprimertramite.controllers;
 
 import pe.edu.upc.miprimertramite.dtos.ActividadSistemaDTO;
 import pe.edu.upc.miprimertramite.entities.ActividadSistema;
+import pe.edu.upc.miprimertramite.entities.Usuario;
 import pe.edu.upc.miprimertramite.servicesinterfaces.IActividadSistemaService;
+import pe.edu.upc.miprimertramite.servicesinterfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,12 +21,22 @@ public class ActividadSistemaController {
     @Autowired
     private IActividadSistemaService actividadSistemaService;
 
+    @Autowired
+    private IUsuarioService usuarioService;
+
     @PostMapping
     public ResponseEntity<ActividadSistemaDTO> create(@RequestBody ActividadSistemaDTO dto) {
+        // Obtener entidad relacionada
+        Usuario usuario = usuarioService.findById(dto.getIdUsuario());
+        if (usuario == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Usuario no encontrado
+        }
+
         ActividadSistema actividad = new ActividadSistema();
-        actividad.setIdUsuario(dto.getIdUsuario());
+        actividad.setUsuario(usuario);
         actividad.setTipoActividad(dto.getTipoActividad());
         actividad.setDescripcion(dto.getDescripcion());
+        actividad.setFecha(LocalDateTime.now());
 
         ActividadSistema saved = actividadSistemaService.save(actividad);
         return new ResponseEntity<>(toDTO(saved), HttpStatus.CREATED);
@@ -48,8 +61,13 @@ public class ActividadSistemaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
-        actividadSistemaService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        ActividadSistema actividad = actividadSistemaService.findById(id);
+        if (actividad != null) {
+            actividadSistemaService.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/usuario/{idUsuario}")
@@ -63,7 +81,7 @@ public class ActividadSistemaController {
     private ActividadSistemaDTO toDTO(ActividadSistema entidad) {
         return new ActividadSistemaDTO(
                 entidad.getIdActividad(),
-                entidad.getIdUsuario(),
+                entidad.getUsuario().getId(),
                 entidad.getTipoActividad(),
                 entidad.getDescripcion(),
                 entidad.getFecha()
