@@ -1,6 +1,8 @@
 package pe.edu.upc.miprimertramite.entities;
 
 import jakarta.persistence.*;
+import jdk.jfr.Enabled;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,6 +32,9 @@ public class Usuario {
 
     @Column(name = "UltimoLogin")
     private LocalDateTime ultimoLogin;
+
+    @Column(name = "Enabled")
+    private boolean enabled;
 
     // Relaciones
     @ManyToOne(fetch = FetchType.LAZY)
@@ -67,6 +72,7 @@ public class Usuario {
         this.password = password;
         this.telefono = telefono;
         this.ultimoLogin = null;
+        this.enabled = true;
     }
 
     // Getters y Setters
@@ -114,4 +120,7 @@ public class Usuario {
 
     public List<UsuarioTramiteProgreso> getProgresos() { return progresos; }
     public void setProgresos(List<UsuarioTramiteProgreso> progresos) { this.progresos = progresos; }
+
+    public boolean getEnabled() { return enabled;}
+    public void setEnabled(boolean enabled) { this.enabled = enabled;}
 }

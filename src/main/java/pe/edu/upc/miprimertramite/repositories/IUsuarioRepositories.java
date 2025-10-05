@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface IUsuarioRepositories extends JpaRepository<Usuario, Integer> {
+    Usuario findOneByEmail(String  email);
 
     @Query(value = "SELECT * FROM Usuarios WHERE Email = ?1", nativeQuery = true)
     Usuario findByEmail(String email);
