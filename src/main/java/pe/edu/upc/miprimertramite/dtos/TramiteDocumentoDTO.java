@@ -1,13 +1,22 @@
 package pe.edu.upc.miprimertramite.dtos;
 
-import pe.edu.upc.miprimertramite.entities.Tramite;
-
 public class TramiteDocumentoDTO {
 
     private int idDocumento;
     private String nombre;
     private Boolean esOpcional;
-    private Tramite tramite;
+    private int idTramite;
+
+    public TramiteDocumentoDTO() {
+
+    }
+
+    public TramiteDocumentoDTO(int idDocumento, String nombre, Boolean esOpcional, int idTramite) {
+        this.idDocumento = idDocumento;
+        this.nombre = nombre;
+        this.esOpcional = esOpcional;
+        this.idTramite = idTramite;
+    }
 
     public int getIdDocumento() {
         return idDocumento;
@@ -33,11 +42,11 @@ public class TramiteDocumentoDTO {
         this.esOpcional = esOpcional;
     }
 
-    public Tramite getTramite() {
-        return tramite;
+    public int getIdTramite() {
+        return idTramite;
     }
 
-    public void setTramite(Tramite tramite) {
-        this.tramite = tramite;
+    public void setIdTramite(int idTramite) {
+        this.idTramite = idTramite;
     }
 }

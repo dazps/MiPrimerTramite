@@ -5,24 +5,24 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ActividadSistema")
+@Table(name = "actividad_sistema")
 public class ActividadSistema {
 
     @Id
     @GeneratedValue
     private int idActividad;
 
-    @Column(name = "TipoActividad", length = 50, nullable = false)
+    @Column(name = "tipo_actividad", length = 50, nullable = false)
     private String tipoActividad;
 
-    @Column(name = "Descripcion", length = 255, nullable = false)
+    @Column(name = "descripcion", length = 255, nullable = false)
     private String descripcion;
 
-    @Column(name = "Fecha", nullable = false)
+    @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     public ActividadSistema(){

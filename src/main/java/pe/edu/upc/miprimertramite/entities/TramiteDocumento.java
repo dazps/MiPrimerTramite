@@ -3,21 +3,21 @@ package pe.edu.upc.miprimertramite.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TramiteDocumento")
+@Table(name = "tramite_documento")
 public class TramiteDocumento {
 
     @Id
     @GeneratedValue
     private int idDocumento;
 
-    @Column(name = "Nombre", length = 150, nullable = false)
+    @Column(name = "nombre", length = 150, nullable = false)
     private String nombre;
 
-    @Column(name = "EsOpcional", nullable = false)
+    @Column(name = "es_opcional", nullable = false)
     private Boolean esOpcional;
 
     @ManyToOne
-    @JoinColumn(name = "idTramite")
+    @JoinColumn(name = "id_tramite")
     private Tramite tramite;
 
     public TramiteDocumento() {

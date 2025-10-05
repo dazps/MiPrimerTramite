@@ -5,22 +5,22 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "UsuarioFavorito")
+@Table(name = "usuario_favorito")
 public class UsuarioFavorito {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int idFavorito;
 
-    @Column(name = "fechaAgregado", nullable = false)
+    @Column(name = "fecha_agregado", nullable = false)
     private LocalDateTime fechaAgregado;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "idTramite")
+    @JoinColumn(name = "id_tramite")
     private Tramite tramite;
 
     public UsuarioFavorito() {

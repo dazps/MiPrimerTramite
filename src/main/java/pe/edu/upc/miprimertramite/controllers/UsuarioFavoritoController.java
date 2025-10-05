@@ -34,18 +34,18 @@ public class UsuarioFavoritoController {
         // Verificar si ya existe un favorito para este usuario y trámite
         UsuarioFavorito existing = usuarioFavoritoService.findByUsuarioAndTramite(dto.getIdUsuario(), dto.getIdTramite());
         if (existing != null) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT); // Ya existe
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         // Obtener entidades relacionadas
         Usuario usuario = usuarioService.findById(dto.getIdUsuario());
         if (usuario == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Usuario no encontrado
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         Tramite tramite = tramiteService.findById(dto.getIdTramite());
         if (tramite == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Trámite no encontrado
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         UsuarioFavorito favorito = new UsuarioFavorito();
@@ -85,6 +85,17 @@ public class UsuarioFavoritoController {
         }
     }
 
+    @DeleteMapping("/usuario/{idUsuario}/tramite/{idTramite}")
+    public ResponseEntity<Void> deleteByUsuarioAndTramite(@PathVariable int idUsuario, @PathVariable int idTramite) {
+        UsuarioFavorito favorito = usuarioFavoritoService.findByUsuarioAndTramite(idUsuario, idTramite);
+        if (favorito != null) {
+            usuarioFavoritoService.delete(favorito.getIdFavorito());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<List<UsuarioFavoritoDTO>> getByUsuarioId(@PathVariable int idUsuario) {
         List<UsuarioFavorito> favoritos = usuarioFavoritoService.findByUsuarioId(idUsuario);
@@ -111,8 +122,8 @@ public class UsuarioFavoritoController {
     private UsuarioFavoritoDTO toDTO(UsuarioFavorito entidad) {
         return new UsuarioFavoritoDTO(
                 entidad.getIdFavorito(),
-                entidad.getUsuario().getId(),
-                entidad.getTramite().getId(),
+                entidad.getUsuario().getIdUsuario(),
+                entidad.getTramite().getIdTramite(),
                 entidad.getFechaAgregado()
         );
     }

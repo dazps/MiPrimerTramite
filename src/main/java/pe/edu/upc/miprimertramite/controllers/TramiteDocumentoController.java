@@ -28,13 +28,13 @@ public class TramiteDocumentoController {
         // Obtener entidad relacionada
         Tramite tramite = tramiteService.findById(dto.getIdTramite());
         if (tramite == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Trámite no encontrado
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         TramiteDocumento documento = new TramiteDocumento();
         documento.setTramite(tramite);
         documento.setNombre(dto.getNombre());
-        documento.setEsOpcional(dto.isEsOpcional());
+        documento.setEsOpcional(dto.getEsOpcional());
 
         TramiteDocumento saved = tramiteDocumentoService.save(documento);
         return new ResponseEntity<>(toDTO(saved), HttpStatus.CREATED);
@@ -84,9 +84,9 @@ public class TramiteDocumentoController {
     private TramiteDocumentoDTO toDTO(TramiteDocumento entidad) {
         return new TramiteDocumentoDTO(
                 entidad.getIdDocumento(),
-                entidad.getTramite().getId(),
                 entidad.getNombre(),
-                entidad.isEsOpcional()
+                entidad.getEsOpcional(),
+                entidad.getTramite().getIdTramite()
         );
     }
 }

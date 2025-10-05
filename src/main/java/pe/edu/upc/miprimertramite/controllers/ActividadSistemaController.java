@@ -29,7 +29,7 @@ public class ActividadSistemaController {
         // Obtener entidad relacionada
         Usuario usuario = usuarioService.findById(dto.getIdUsuario());
         if (usuario == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Usuario no encontrado
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         ActividadSistema actividad = new ActividadSistema();
@@ -40,6 +40,30 @@ public class ActividadSistemaController {
 
         ActividadSistema saved = actividadSistemaService.save(actividad);
         return new ResponseEntity<>(toDTO(saved), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ActividadSistemaDTO> update(@PathVariable int id, @RequestBody ActividadSistemaDTO dto) {
+        ActividadSistema actividad = actividadSistemaService.findById(id);
+        if (actividad == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Actualizar campos
+        actividad.setTipoActividad(dto.getTipoActividad());
+        actividad.setDescripcion(dto.getDescripcion());
+
+        // Si se actualiza el usuario
+        if (dto.getIdUsuario() != actividad.getUsuario().getIdUsuario()) {
+            Usuario usuario = usuarioService.findById(dto.getIdUsuario());
+            if (usuario == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            actividad.setUsuario(usuario);
+        }
+
+        ActividadSistema updated = actividadSistemaService.save(actividad);
+        return new ResponseEntity<>(toDTO(updated), HttpStatus.OK);
     }
 
     @GetMapping
@@ -77,11 +101,10 @@ public class ActividadSistemaController {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
-    // Helper: Convertir Entidad a DTO
     private ActividadSistemaDTO toDTO(ActividadSistema entidad) {
         return new ActividadSistemaDTO(
                 entidad.getIdActividad(),
-                entidad.getUsuario().getId(),
+                entidad.getUsuario().getIdUsuario(),
                 entidad.getTipoActividad(),
                 entidad.getDescripcion(),
                 entidad.getFecha()
