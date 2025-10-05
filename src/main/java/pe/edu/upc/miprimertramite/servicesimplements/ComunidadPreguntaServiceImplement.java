@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.ComunidadPregunta;
-import pe.edu.upc.miprimertramite.repositories.IComunidadPreguntaRepository;
+import pe.edu.upc.miprimertramite.repositories.IComunidadPreguntaRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.IComunidadPreguntaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 public class ComunidadPreguntaServiceImplement implements IComunidadPreguntaService {
 
     @Autowired
-    private IComunidadPreguntaRepository comunidadPreguntaRepository;
+    private IComunidadPreguntaRepositories comunidadPreguntaRepository;
 
     @Override
     public ComunidadPregunta save(ComunidadPregunta pregunta) {

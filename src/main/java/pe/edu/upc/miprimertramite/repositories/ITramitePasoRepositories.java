@@ -1,18 +1,23 @@
 package pe.edu.upc.miprimertramite.repositories;
 
-import pe.edu.upc.miprimertramite.entities.TramitePaso;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pe.edu.upc.miprimertramite.entities.TramitePaso;
 
 import java.util.List;
 
 @Repository
-public interface ITramitePasoRepository extends JpaRepository<TramitePaso, Integer> {
+public interface ITramitePasoRepositories extends JpaRepository<TramitePaso, Integer> {
 
-    @Query(value = "SELECT * FROM Tramite_Pasos WHERE ID_Tram = ?1", nativeQuery = true)
-    List<TramitePaso> findByTramiteId(int idTramite);
+    @Query("SELECT tp FROM TramitePaso tp WHERE tp.descripcionPaso LIKE %:desc%")
+    public List<TramitePaso> buscarPorDescripcion(@Param("desc") String descripcion);
 
-    @Query(value = "SELECT * FROM Tramite_Pasos WHERE ID_Tram = ?1 ORDER BY Orden ASC", nativeQuery = true)
-    List<TramitePaso> findByTramiteIdOrdered(int idTramite);
+    public List<TramitePaso> findByTramiteIdTramiteOrderByOrdenPasoAsc(int idTramite);
+
+    @Query("SELECT COUNT(tp) FROM TramitePaso tp WHERE tp.tramite.idTramite = :idTramite")
+    public Long contarPasosPorTramite(@Param("idTramite") int idTramite);
 }
+
+

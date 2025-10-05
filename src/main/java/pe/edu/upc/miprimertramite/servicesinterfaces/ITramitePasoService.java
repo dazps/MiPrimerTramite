@@ -4,10 +4,12 @@ import pe.edu.upc.miprimertramite.entities.TramitePaso;
 import java.util.List;
 
 public interface ITramitePasoService {
-    TramitePaso save(TramitePaso paso);
-    List<TramitePaso> list();
-    TramitePaso findById(int id);
-    void delete(int id);
-    List<TramitePaso> findByTramiteId(int idTramite);
-    List<TramitePaso> findByTramiteIdOrdered(int idTramite);
+    public List<TramitePaso> list();
+    public void insert(TramitePaso t);
+    public TramitePaso listId(int id);
+    public void update(TramitePaso t);
+    public void delete(int id);
+    public List<TramitePaso> searchDescription(String descriptionPaso);
+    public List<TramitePaso> listByTramiteId(int idTramite);
+    public int countStepsByTramiteId(int idTramite);
 }

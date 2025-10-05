@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ITramiteRepository extends JpaRepository<Tramite, Integer> {
+public interface ITramiteRepositories extends JpaRepository<Tramite, Integer> {
 
     @Query(value = "SELECT * FROM Tramites ORDER BY Popularidad DESC LIMIT 10", nativeQuery = true)
     List<Tramite> findTop10ByPopularidad();

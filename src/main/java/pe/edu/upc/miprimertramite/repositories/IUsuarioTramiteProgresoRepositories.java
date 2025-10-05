@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IUsuarioTramiteProgresoRepository extends JpaRepository<UsuarioTramiteProgreso, Integer> {
+public interface IUsuarioTramiteProgresoRepositories extends JpaRepository<UsuarioTramiteProgreso, Integer> {
 
     @Query(value = "SELECT * FROM Usuario_Tramite_Progreso WHERE ID_Usuario = ?1 AND ID_Tramite = ?2", nativeQuery = true)
     List<UsuarioTramiteProgreso> findByUsuarioAndTramite(int idUsuario, int idTramite);

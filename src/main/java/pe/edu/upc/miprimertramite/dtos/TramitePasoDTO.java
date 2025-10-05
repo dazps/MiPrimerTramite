@@ -2,34 +2,40 @@ package pe.edu.upc.miprimertramite.dtos;
 
 public class TramitePasoDTO {
     private int idPaso;
-    private int idTram;
-    private int orden;
-    private String titulo;
-    private String descripc;
+    private int idTramite;
+    private String descripcionPaso;
+    private int ordenPaso;
 
-    public TramitePasoDTO() {}
-
-    public TramitePasoDTO(int idPaso, int idTram, int orden, String titulo, String descripc) {
-        this.idPaso = idPaso;
-        this.idTram = idTram;
-        this.orden = orden;
-        this.titulo = titulo;
-        this.descripc = descripc;
+    public int getIdPaso() {
+        return idPaso;
     }
 
-    // Getters y Setters
-    public int getIdPaso() { return idPaso; }
-    public void setIdPaso(int idPaso) { this.idPaso = idPaso; }
+    public void setIdPaso(int idPaso) {
+        this.idPaso = idPaso;
+    }
 
-    public int getIdTram() { return idTram; }
-    public void setIdTram(int idTram) { this.idTram = idTram; }
+    public int getIdTramite() {
+        return idTramite;
+    }
 
-    public int getOrden() { return orden; }
-    public void setOrden(int orden) { this.orden = orden; }
+    public void setIdTramite(int idTramite) {
+        this.idTramite = idTramite;
+    }
 
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public String getDescripcionPaso() {
+        return descripcionPaso;
+    }
 
-    public String getDescripc() { return descripc; }
-    public void setDescripc(String descripc) { this.descripc = descripc; }
+    public void setDescripcionPaso(String descripcionPaso) {
+        this.descripcionPaso = descripcionPaso;
+    }
+
+    public int getOrdenPaso() {
+        return ordenPaso;
+    }
+
+    public void setOrdenPaso(int ordenPaso) {
+        this.ordenPaso = ordenPaso;
+    }
 }
+

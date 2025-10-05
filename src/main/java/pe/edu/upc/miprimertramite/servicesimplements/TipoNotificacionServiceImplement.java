@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.TipoNotificacion;
-import pe.edu.upc.miprimertramite.repositories.ITipoNotificacionRepository;
+import pe.edu.upc.miprimertramite.repositories.ITipoNotificacionRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.ITipoNotificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TipoNotificacionServiceImpl implements ITipoNotificacionService {
+public class TipoNotificacionServiceImplement implements ITipoNotificacionService {
 
     @Autowired
-    private ITipoNotificacionRepository tipoNotificacionRepository;
+    private ITipoNotificacionRepositories tipoNotificacionRepository;
 
     @Override
     public TipoNotificacion save(TipoNotificacion tipo) {

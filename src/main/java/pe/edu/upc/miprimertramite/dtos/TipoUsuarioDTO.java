@@ -1,25 +1,31 @@
 package pe.edu.upc.miprimertramite.dtos;
 
 public class TipoUsuarioDTO {
-    private int idTipoUsuario;
-    private String nombre;
-    private String descripcion;
+    private int idTipo;
+    private String nombreTipo;
+    private String descripcionTipo;
 
-    public TipoUsuarioDTO() {}
-
-    public TipoUsuarioDTO(int idTipoUsuario, String nombre, String descripcion) {
-        this.idTipoUsuario = idTipoUsuario;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+    public int getIdTipo() {
+        return idTipo;
     }
 
-    // Getters y Setters
-    public int getIdTipoUsuario() { return idTipoUsuario; }
-    public void setIdTipoUsuario(int idTipoUsuario) { this.idTipoUsuario = idTipoUsuario; }
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getNombreTipo() {
+        return nombreTipo;
+    }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setNombreTipo(String nombreTipo) {
+        this.nombreTipo = nombreTipo;
+    }
+
+    public String getDescripcionTipo() {
+        return descripcionTipo;
+    }
+
+    public void setDescripcionTipo(String descripcionTipo) {
+        this.descripcionTipo = descripcionTipo;
+    }
 }

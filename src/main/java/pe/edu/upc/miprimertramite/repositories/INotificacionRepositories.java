@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface INotificacionRepository extends JpaRepository<Notificacion, Integer> {
+public interface INotificacionRepositories extends JpaRepository<Notificacion, Integer> {
 
     @Query(value = "SELECT * FROM Notificaciones WHERE ID_Usuario = ?1 AND Enviado = FALSE", nativeQuery = true)
     List<Notificacion> findPendingByUsuarioId(int idUsuario);

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ITipoNotificacionRepository extends JpaRepository<TipoNotificacion, Integer> {
+public interface ITipoNotificacionRepositories extends JpaRepository<TipoNotificacion, Integer> {
 
     @Query(value = "SELECT * FROM Tipo_Notificaciones WHERE Nombre = ?1", nativeQuery = true)
     TipoNotificacion findByNombre(String nombre);

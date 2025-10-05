@@ -4,39 +4,58 @@ import java.time.LocalDateTime;
 
 public class ValoracionTramiteDTO {
     private int idValoracion;
-    private int idUsuario;
-    private int idTramite;
+    private int idusuario;
+    private int idtramite;
     private int puntuacion;
     private String comentario;
-    private LocalDateTime fecha;
+    private LocalDateTime fechaValoracion;
 
-    public ValoracionTramiteDTO() {}
-
-    public ValoracionTramiteDTO(int idValoracion, int idUsuario, int idTramite, int puntuacion, String comentario, LocalDateTime fecha) {
-        this.idValoracion = idValoracion;
-        this.idUsuario = idUsuario;
-        this.idTramite = idTramite;
-        this.puntuacion = puntuacion;
-        this.comentario = comentario;
-        this.fecha = fecha;
+    public int getIdValoracion() {
+        return idValoracion;
     }
 
-    // Getters y Setters
-    public int getIdValoracion() { return idValoracion; }
-    public void setIdValoracion(int idValoracion) { this.idValoracion = idValoracion; }
+    public void setIdValoracion(int idValoracion) {
+        this.idValoracion = idValoracion;
+    }
 
-    public int getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
+    public int getIdusuario() {
+        return idusuario;
+    }
 
-    public int getIdTramite() { return idTramite; }
-    public void setIdTramite(int idTramite) { this.idTramite = idTramite; }
+    public void setIdusuario(int idusuario) {
+        this.idusuario = idusuario;
+    }
 
-    public int getPuntuacion() { return puntuacion; }
-    public void setPuntuacion(int puntuacion) { this.puntuacion = puntuacion; }
+    public int getIdtramite() {
+        return idtramite;
+    }
 
-    public String getComentario() { return comentario; }
-    public void setComentario(String comentario) { this.comentario = comentario; }
+    public void setIdtramite(int idtramite) {
+        this.idtramite = idtramite;
+    }
 
-    public LocalDateTime getFecha() { return fecha; }
-    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public LocalDateTime getFechaValoracion() {
+        return fechaValoracion;
+    }
+
+    public void setFechaValoracion(LocalDateTime fechaValoracion) {
+        this.fechaValoracion = fechaValoracion;
+    }
 }
+

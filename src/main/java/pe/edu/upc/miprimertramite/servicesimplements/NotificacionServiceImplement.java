@@ -1,7 +1,7 @@
-package pe.edu.upc.miprimertramite.servicesimplementations;
+package pe.edu.upc.miprimertramite.servicesimplements;
 
 import pe.edu.upc.miprimertramite.entities.Notificacion;
-import pe.edu.upc.miprimertramite.repositories.INotificacionRepository;
+import pe.edu.upc.miprimertramite.repositories.INotificacionRepositories;
 import pe.edu.upc.miprimertramite.servicesinterfaces.INotificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 public class NotificacionServiceImplement implements INotificacionService {
 
     @Autowired
-    private INotificacionRepository notificacionRepository;
+    private INotificacionRepositories notificacionRepository;
 
     @Override
     public Notificacion save(Notificacion notificacion) {
