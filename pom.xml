@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pe.edu.upc</groupId>
-    <artifactId>demoSanMiguel</artifactId>
+    <artifactId>miprimertramite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demoSanMiguel</name>
-    <description>demoSanMiguel</description>
+    <name>miprimertramite</name>
+    <description>miprimertramite</description>
     <url/>
     <licenses>
         <license/>
