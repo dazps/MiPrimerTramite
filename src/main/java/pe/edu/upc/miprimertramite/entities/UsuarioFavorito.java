@@ -1,57 +1,68 @@
 package pe.edu.upc.miprimertramite.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Usuario_Favoritos")
+@Table(name = "usuario_favorito")
 public class UsuarioFavorito {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Favorito")
+    @GeneratedValue
     private int idFavorito;
 
-    @Column(name = "ID_Usuario", nullable = false)
-    private int idUsuario;
-
-    @Column(name = "ID_Tramite", nullable = false)
-    private int idTramite;
-
-    @Column(name = "FechaAgregado")
+    @Column(name = "fecha_agregado", nullable = false)
     private LocalDateTime fechaAgregado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_Usuario", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_Tramite", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_tramite")
     private Tramite tramite;
 
-    public UsuarioFavorito() {}
+    public UsuarioFavorito() {
 
-    public UsuarioFavorito(int idUsuario, int idTramite) {
-        this.idUsuario = idUsuario;
-        this.idTramite = idTramite;
-        this.fechaAgregado = LocalDateTime.now();
     }
 
-    public int getIdFavorito() { return idFavorito; }
-    public void setIdFavorito(int idFavorito) { this.idFavorito = idFavorito; }
+    public UsuarioFavorito(int idFavorito, LocalDateTime fechaAgregado, Usuario usuario, Tramite tramite) {
+        this.idFavorito = idFavorito;
+        this.fechaAgregado = fechaAgregado;
+        this.usuario = usuario;
+        this.tramite = tramite;
+    }
 
-    public int getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
+    public int getIdFavorito() {
+        return idFavorito;
+    }
 
-    public int getIdTramite() { return idTramite; }
-    public void setIdTramite(int idTramite) { this.idTramite = idTramite; }
+    public void setIdFavorito(int idFavorito) {
+        this.idFavorito = idFavorito;
+    }
 
-    public LocalDateTime getFechaAgregado() { return fechaAgregado; }
-    public void setFechaAgregado(LocalDateTime fechaAgregado) { this.fechaAgregado = fechaAgregado; }
+    public LocalDateTime getFechaAgregado() {
+        return fechaAgregado;
+    }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public void setFechaAgregado(LocalDateTime fechaAgregado) {
+        this.fechaAgregado = fechaAgregado;
+    }
 
-    public Tramite getTramite() { return tramite; }
-    public void setTramite(Tramite tramite) { this.tramite = tramite; }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Tramite getTramite() {
+        return tramite;
+    }
+
+    public void setTramite(Tramite tramite) {
+        this.tramite = tramite;
+    }
 }

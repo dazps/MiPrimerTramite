@@ -12,40 +12,40 @@ import java.util.List;
 public class UsuarioFavoritoServiceImplement implements IUsuarioFavoritoService {
 
     @Autowired
-    private IUsuarioFavoritoRepositories usuarioFavoritoRepository;
+    private IUsuarioFavoritoRepositories repository;
 
     @Override
     public UsuarioFavorito save(UsuarioFavorito favorito) {
-        return usuarioFavoritoRepository.save(favorito);
+        return repository.save(favorito);
     }
 
     @Override
     public List<UsuarioFavorito> list() {
-        return usuarioFavoritoRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public UsuarioFavorito findById(int id) {
-        return usuarioFavoritoRepository.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public void delete(int id) {
-        usuarioFavoritoRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     public List<UsuarioFavorito> findByUsuarioId(int idUsuario) {
-        return usuarioFavoritoRepository.findByUsuarioId(idUsuario);
+        return repository.findByUsuarioId(idUsuario);
     }
 
     @Override
     public Long countByTramiteId(int idTramite) {
-        return usuarioFavoritoRepository.countByTramiteId(idTramite);
+        return repository.countByTramiteId(idTramite);
     }
 
     @Override
     public UsuarioFavorito findByUsuarioAndTramite(int idUsuario, int idTramite) {
-        return usuarioFavoritoRepository.findByUsuarioAndTramite(idUsuario, idTramite);
+        return repository.findByUsuarioAndTramite(idUsuario, idTramite);
     }
 }

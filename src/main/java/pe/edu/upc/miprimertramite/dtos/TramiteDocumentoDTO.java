@@ -1,30 +1,52 @@
 package pe.edu.upc.miprimertramite.dtos;
 
 public class TramiteDocumentoDTO {
+
     private int idDocumento;
-    private int idTramite;
     private String nombre;
-    private boolean esOpcional;
+    private Boolean esOpcional;
+    private int idTramite;
 
-    public TramiteDocumentoDTO() {}
+    public TramiteDocumentoDTO() {
 
-    public TramiteDocumentoDTO(int idDocumento, int idTramite, String nombre, boolean esOpcional) {
+    }
+
+    public TramiteDocumentoDTO(int idDocumento, String nombre, Boolean esOpcional, int idTramite) {
         this.idDocumento = idDocumento;
-        this.idTramite = idTramite;
         this.nombre = nombre;
+        this.esOpcional = esOpcional;
+        this.idTramite = idTramite;
+    }
+
+    public int getIdDocumento() {
+        return idDocumento;
+    }
+
+    public void setIdDocumento(int idDocumento) {
+        this.idDocumento = idDocumento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Boolean getEsOpcional() {
+        return esOpcional;
+    }
+
+    public void setEsOpcional(Boolean esOpcional) {
         this.esOpcional = esOpcional;
     }
 
-    // Getters y Setters
-    public int getIdDocumento() { return idDocumento; }
-    public void setIdDocumento(int idDocumento) { this.idDocumento = idDocumento; }
+    public int getIdTramite() {
+        return idTramite;
+    }
 
-    public int getIdTramite() { return idTramite; }
-    public void setIdTramite(int idTramite) { this.idTramite = idTramite; }
-
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-
-    public boolean isEsOpcional() { return esOpcional; }
-    public void setEsOpcional(boolean esOpcional) { this.esOpcional = esOpcional; }
+    public void setIdTramite(int idTramite) {
+        this.idTramite = idTramite;
+    }
 }

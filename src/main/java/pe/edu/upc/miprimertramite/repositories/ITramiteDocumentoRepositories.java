@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface ITramiteDocumentoRepositories extends JpaRepository<TramiteDocumento, Integer> {
 
-    @Query(value = "SELECT * FROM Tramite_Documentos WHERE ID_Tramite = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM tramite_documento WHERE id_tramite = ?1", nativeQuery = true)
     List<TramiteDocumento> findByTramiteId(int idTramite);
 
-    @Query(value = "SELECT COUNT(*) FROM Tramite_Documentos WHERE ID_Tramite = ?1 AND EsOpcional = FALSE", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM tramite_documento WHERE id_tramite = ?1 AND es_opcional = FALSE", nativeQuery = true)
     Long countRequiredDocumentsByTramiteId(int idTramite);
 }

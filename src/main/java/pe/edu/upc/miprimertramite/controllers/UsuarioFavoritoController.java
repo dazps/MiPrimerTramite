@@ -2,12 +2,17 @@ package pe.edu.upc.miprimertramite.controllers;
 
 import pe.edu.upc.miprimertramite.dtos.UsuarioFavoritoDTO;
 import pe.edu.upc.miprimertramite.entities.UsuarioFavorito;
+import pe.edu.upc.miprimertramite.entities.Usuario;
+import pe.edu.upc.miprimertramite.entities.Tramite;
 import pe.edu.upc.miprimertramite.servicesinterfaces.IUsuarioFavoritoService;
+import pe.edu.upc.miprimertramite.servicesinterfaces.IUsuarioService;
+import pe.edu.upc.miprimertramite.servicesinterfaces.ITramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,11 +23,35 @@ public class UsuarioFavoritoController {
     @Autowired
     private IUsuarioFavoritoService usuarioFavoritoService;
 
+    @Autowired
+    private IUsuarioService usuarioService;
+
+    @Autowired
+    private ITramiteService tramiteService;
+
     @PostMapping
     public ResponseEntity<UsuarioFavoritoDTO> create(@RequestBody UsuarioFavoritoDTO dto) {
+        // Verificar si ya existe un favorito para este usuario y trámite
+        UsuarioFavorito existing = usuarioFavoritoService.findByUsuarioAndTramite(dto.getIdUsuario(), dto.getIdTramite());
+        if (existing != null) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        // Obtener entidades relacionadas
+        Usuario usuario = usuarioService.findById(dto.getIdUsuario());
+        if (usuario == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Tramite tramite = tramiteService.findById(dto.getIdTramite());
+        if (tramite == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         UsuarioFavorito favorito = new UsuarioFavorito();
-        favorito.setIdUsuario(dto.getIdUsuario());
-        favorito.setIdTramite(dto.getIdTramite());
+        favorito.setUsuario(usuario);
+        favorito.setTramite(tramite);
+        favorito.setFechaAgregado(LocalDateTime.now());
 
         UsuarioFavorito saved = usuarioFavoritoService.save(favorito);
         return new ResponseEntity<>(toDTO(saved), HttpStatus.CREATED);
@@ -47,8 +76,24 @@ public class UsuarioFavoritoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
-        usuarioFavoritoService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        UsuarioFavorito favorito = usuarioFavoritoService.findById(id);
+        if (favorito != null) {
+            usuarioFavoritoService.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/usuario/{idUsuario}/tramite/{idTramite}")
+    public ResponseEntity<Void> deleteByUsuarioAndTramite(@PathVariable int idUsuario, @PathVariable int idTramite) {
+        UsuarioFavorito favorito = usuarioFavoritoService.findByUsuarioAndTramite(idUsuario, idTramite);
+        if (favorito != null) {
+            usuarioFavoritoService.delete(favorito.getIdFavorito());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/usuario/{idUsuario}")
@@ -77,8 +122,8 @@ public class UsuarioFavoritoController {
     private UsuarioFavoritoDTO toDTO(UsuarioFavorito entidad) {
         return new UsuarioFavoritoDTO(
                 entidad.getIdFavorito(),
-                entidad.getIdUsuario(),
-                entidad.getIdTramite(),
+                entidad.getUsuario().getIdUsuario(),
+                entidad.getTramite().getIdTramite(),
                 entidad.getFechaAgregado()
         );
     }

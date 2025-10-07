@@ -12,35 +12,35 @@ import java.util.List;
 public class TramiteDocumentoServiceImplement implements ITramiteDocumentoService {
 
     @Autowired
-    private ITramiteDocumentoRepositories tramiteDocumentoRepository;
+    private ITramiteDocumentoRepositories repository;
 
     @Override
     public TramiteDocumento save(TramiteDocumento documento) {
-        return tramiteDocumentoRepository.save(documento);
+        return repository.save(documento);
     }
 
     @Override
     public List<TramiteDocumento> list() {
-        return tramiteDocumentoRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public TramiteDocumento findById(int id) {
-        return tramiteDocumentoRepository.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public void delete(int id) {
-        tramiteDocumentoRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     public List<TramiteDocumento> findByTramiteId(int idTramite) {
-        return tramiteDocumentoRepository.findByTramiteId(idTramite);
+        return repository.findByTramiteId(idTramite);
     }
 
     @Override
     public Long countRequiredDocumentsByTramiteId(int idTramite) {
-        return tramiteDocumentoRepository.countRequiredDocumentsByTramiteId(idTramite);
+        return repository.countRequiredDocumentsByTramiteId(idTramite);
     }
 }

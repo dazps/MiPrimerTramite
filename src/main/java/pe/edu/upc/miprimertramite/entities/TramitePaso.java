@@ -20,14 +20,18 @@ public class TramitePaso {
     @Column(name = "orden", nullable = false)
     private int ordenPaso;
 
+    @Column(name="titulo",nullable=false, length=50)
+    private String tituloPaso;
+
     // Constructor vacío
     public TramitePaso() {}
 
     // Constructor con parámetros
-    public TramitePaso(Tramite tramite, String descripcionPaso, int ordenPaso) {
+    public TramitePaso(Tramite tramite, String descripcionPaso, int ordenPaso, String tituloPaso) {
         this.tramite = tramite;
         this.descripcionPaso = descripcionPaso;
         this.ordenPaso = ordenPaso;
+        this.tituloPaso= tituloPaso;
     }
 
     // Getters y Setters
@@ -38,6 +42,14 @@ public class TramitePaso {
     public void setIdPaso(int idPaso) {
         this.idPaso = idPaso;
     }
+
+    public String getTituloPaso(){
+        return tituloPaso;
+    }
+    public void setTituloPaso(String tituloPaso){
+        this.tituloPaso= tituloPaso;
+    }
+    
 
     public Tramite getTramite() {
         return tramite;
